@@ -1,0 +1,142 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Reservation Summary Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="18dp"
+            android:elevation="4dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Votre réservation"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:text="Espace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Label"/>
+            <TextView android:text="SAMURAI - COURT-2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Value"/>
+
+            <TextView android:text="Prix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Label"/>
+            <TextView android:text="80.00 DT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Value"/>
+
+            <TextView android:text="Date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Label"/>
+            <TextView android:text="2025-12-08"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Value"/>
+
+            <TextView android:text="Heure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Label"/>
+            <TextView android:text="21:30 - 23:00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Value"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDD"
+                android:layout_marginVertical="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total : 80.00 DT"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#005BFF"/>
+        </LinearLayout>
+
+
+        <!-- Login Form Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="18dp"
+            android:elevation="4dp">
+
+            <TextView
+
+                android:layout_height="wrap_content"
+                android:text="Bienvenue à nouveau"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_width="match_parent"/>
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="12dp"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mot de passe"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:layout_marginTop="12dp"/>
+
+            <Button
+                android:id="@+id/loginBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SE CONNECTER"
+                android:textAllCaps="false"
+                android:backgroundTint="#005BFF"
+                android:textColor="#FFF"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:id="@+id/forgotSignUpText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mot de passe oublié ?  S'inscrire"
+
+                android:gravity="center"
+                android:layout_marginTop="12dp"
+                android:textColor="#005BFF"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

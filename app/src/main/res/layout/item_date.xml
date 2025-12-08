@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="70dp"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="8dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/date_unselected">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/tvDay"
+        android:text="Mon"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/tvDate"
+        android:text="9 Dec"
+        android:textColor="@android:color/black"/>
+</LinearLayout>
