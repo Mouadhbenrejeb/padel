@@ -58,15 +58,35 @@
             android:textStyle="bold"
             android:textColor="@color/accent"/>
 
-        <!-- User Credits Display -->
-        <TextView
-            android:id="@+id/tvUserCredits"
-            android:layout_width="wrap_content"
+        <!-- User Credits Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Votre crédit: -- DT"
-            android:textSize="16sp"
-            android:textColor="@color/text_on_dark"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+
+            <!-- User Credits Display -->
+            <TextView
+                android:id="@+id/tvUserCredits"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Votre crédit: -- DT"
+                android:textSize="16sp"
+                android:textColor="@color/text_on_dark"/>
+
+            <!-- Add Credit Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddCredit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+ Add Credit"
+                android:textSize="12sp"
+                android:textColor="#081B3A"
+                android:backgroundTint="@color/accent"
+                app:cornerRadius="8dp"/>
+        </LinearLayout>
     </LinearLayout>
 
     <!-- Empty State Text -->

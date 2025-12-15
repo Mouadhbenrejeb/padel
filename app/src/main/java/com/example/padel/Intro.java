@@ -31,5 +31,11 @@ public class Intro extends AppCompatActivity {
             Intent intent = new Intent(Intro.this, ReservationLogin.class);
             startActivity(intent);
         });
+
+        // Scan QR button click - go to scan activity
+        binding.scanBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(Intro.this, ScanActivity.class);
+            startActivity(intent);
+        });
     }
 }

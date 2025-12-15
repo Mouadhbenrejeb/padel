@@ -27,7 +27,7 @@ public class ReservationsActivity extends AppCompatActivity {
     List<Reservation> reservationList;
     TextView tvEmpty, tvUserCredits;
     ProgressBar progressBar;
-    Button btnLogout, btnBackMenu;
+    Button btnLogout, btnBackMenu, btnAddCredit;
 
     private FirebaseHelper firebaseHelper;
 
@@ -78,6 +78,13 @@ public class ReservationsActivity extends AppCompatActivity {
         btnBackMenu = findViewById(R.id.btnBackMenu);
         btnBackMenu.setOnClickListener(v -> {
             Intent intent = new Intent(ReservationsActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
+
+        // Setup add credit button
+        btnAddCredit = findViewById(R.id.btnAddCredit);
+        btnAddCredit.setOnClickListener(v -> {
+            Intent intent = new Intent(ReservationsActivity.this, AddCreditActivity.class);
             startActivity(intent);
         });
 
