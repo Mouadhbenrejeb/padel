@@ -1,14 +1,14 @@
 {
   "project_info": {
-    "project_number": "230526950110",
-    "firebase_url": "https://padel-86a71-default-rtdb.firebaseio.com",
-    "project_id": "padel-86a71",
-    "storage_bucket": "padel-86a71.firebasestorage.app"
+    "project_number": "309286575866",
+    "firebase_url": "https://padel-3d07a-default-rtdb.firebaseio.com",
+    "project_id": "padel-3d07a",
+    "storage_bucket": "padel-3d07a.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:230526950110:android:3440d33ba0643a2cd3004f",
+        "mobilesdk_app_id": "1:309286575866:android:7c4ef05956c44e3a6f3343",
         "android_client_info": {
           "package_name": "com.example.padel"
         }
@@ -16,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBNuqEIQKAtbL1rFyvD18rfhuXR-ZK54jw"
+          "current_key": "AIzaSyDy_JevK7aQorIQqaF4VKVB79kiK7JtaYg"
         }
       ],
       "services": {

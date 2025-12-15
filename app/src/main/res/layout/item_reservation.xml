@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:text="Court: A"
                 android:textSize="16sp"
-                android:textColor="@color/black"
+                android:textColor="@color/text_primary"
                 android:textStyle="bold"/>
 
             <TextView
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="Date: 2025-12-10"
                 android:textSize="14sp"
-                android:textColor="@color/dark_gray"/>
+                android:textColor="@color/text_secondary"/>
 
             <TextView
                 android:id="@+id/tvItemTime"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="Time: 18:00"
                 android:textSize="14sp"
-                android:textColor="@color/dark_gray"/>
+                android:textColor="@color/text_secondary"/>
 
             <TextView
                 android:id="@+id/tvItemPlayers"
@@ -53,16 +53,15 @@
                 android:layout_height="wrap_content"
                 android:text="Players: 4"
                 android:textSize="14sp"
-                android:textColor="@color/dark_gray"/>
+                android:textColor="@color/text_secondary"/>
         </LinearLayout>
 
-        <!-- Small QR Code Icon -->
+        <!-- QR Code Image -->
         <ImageView
             android:id="@+id/ivItemQr"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_qr_code"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:contentDescription="QR code"
-            android:tint="@color/black"/>
+            android:scaleType="fitCenter"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

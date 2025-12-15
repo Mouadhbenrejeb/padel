@@ -20,9 +20,15 @@ public class Intro extends AppCompatActivity {
         binding = ActivityIntroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Button click
+        // Reserve button click - go to reservation flow
         binding.startbtn.setOnClickListener(v -> {
             Intent intent = new Intent(Intro.this, MainActivity.class);
+            startActivity(intent);
+        });
+
+        // My Reservations button click - go to login/reservations
+        binding.reservationsBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(Intro.this, ReservationLogin.class);
             startActivity(intent);
         });
     }

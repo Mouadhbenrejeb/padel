@@ -123,7 +123,9 @@
                 android:background="@drawable/rounded_white"
                 android:hint="e.g. 4"
                 android:inputType="number"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey" />
 
             <!-- Reserve Button -->
             <androidx.appcompat.widget.AppCompatButton
@@ -237,7 +239,7 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:src="@drawable/email"
-                                android:tint="@android:color/white" />
+                                app:tint="@android:color/white" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -259,7 +261,7 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:src="@drawable/phone"
-                                android:tint="@android:color/white" />
+                                app:tint="@android:color/white" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -282,13 +284,13 @@
                                 android:layout_height="28dp"
                                 android:layout_marginEnd="10dp"
                                 android:src="@drawable/fb"
-                                android:tint="@android:color/white" />
+                                app:tint="@android:color/white" />
 
                             <ImageView
                                 android:layout_width="28dp"
                                 android:layout_height="28dp"
                                 android:src="@drawable/insta"
-                                android:tint="@android:color/white" />
+                                app:tint="@android:color/white" />
                         </LinearLayout>
 
                     </LinearLayout>

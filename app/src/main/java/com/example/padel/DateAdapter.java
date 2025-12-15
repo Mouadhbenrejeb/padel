@@ -17,11 +17,11 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.Holder> {
         void onDateSelected(String date);
     }
 
-    private List<String> dates;
+    private List<String[]> dates;
     private int selected = 0;
     private OnDateClickListener listener;
 
-    public DateAdapter(List<String> dates, OnDateClickListener listener) {
+    public DateAdapter(List<String[]> dates, OnDateClickListener listener) {
         this.dates = dates;
         this.listener = listener;
     }
@@ -36,14 +36,16 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(@NonNull Holder h, int pos) {
-        h.tvDate.setText(dates.get(pos));
+        String[] dateData = dates.get(pos);
+        h.tvDay.setText(dateData[0]);
+        h.tvDate.setText(dateData[1]);
         h.itemView.setBackgroundResource(
                 pos == selected ? R.drawable.date_selected : R.drawable.date_unselected
         );
 
         h.itemView.setOnClickListener(v -> {
-            selected = pos;
-            listener.onDateSelected(dates.get(pos));
+            selected = h.getAdapterPosition();
+            listener.onDateSelected(dates.get(selected)[1]);
             notifyDataSetChanged();
         });
     }
@@ -52,10 +54,12 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.Holder> {
     public int getItemCount() { return dates.size(); }
 
     static class Holder extends RecyclerView.ViewHolder {
+        TextView tvDay;
         TextView tvDate;
         Holder(View v) {
             super(v);
+            tvDay = v.findViewById(R.id.tvDay);
             tvDate = v.findViewById(R.id.tvDate);
- }
-}
+        }
+    }
 }

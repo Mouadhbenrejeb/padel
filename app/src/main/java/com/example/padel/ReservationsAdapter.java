@@ -2,17 +2,21 @@ package com.example.padel;
 
 
 
+import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
@@ -45,11 +49,44 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
 
         // Generate QR code
         try {
-            Bitmap bitmap = generateQrCode(reservation.getQrContent());
+            Bitmap bitmap = generateQrCode(reservation.getQrContent(), 300);
             holder.ivQrCode.setImageBitmap(bitmap);
         } catch (WriterException e) {
             e.printStackTrace();
         }
+
+        // Set click listener to show larger QR code dialog
+        holder.itemView.setOnClickListener(v -> showQrCodeDialog(v.getContext(), reservation));
+    }
+
+    private void showQrCodeDialog(Context context, Reservation reservation) {
+        Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_qr_code);
+
+        TextView tvDialogTitle = dialog.findViewById(R.id.tvDialogTitle);
+        TextView tvDialogDetails = dialog.findViewById(R.id.tvDialogDetails);
+        ImageView ivDialogQrCode = dialog.findViewById(R.id.ivDialogQrCode);
+        MaterialButton btnCloseDialog = dialog.findViewById(R.id.btnCloseDialog);
+
+        tvDialogTitle.setText("Reservation QR Code");
+        String details = "Court: " + reservation.getCourt() + "\n" +
+                "Date: " + reservation.getDate() + "\n" +
+                "Time: " + reservation.getTime() + "\n" +
+                "Players: " + reservation.getPlayers();
+        tvDialogDetails.setText(details);
+
+        // Generate larger QR code for dialog
+        try {
+            Bitmap bitmap = generateQrCode(reservation.getQrContent(), 600);
+            ivDialogQrCode.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+
+        btnCloseDialog.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
     }
 
     @Override
@@ -71,12 +108,12 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
         }
     }
 
-    private Bitmap generateQrCode(String content) throws WriterException {
+    private Bitmap generateQrCode(String content, int size) throws WriterException {
         MultiFormatWriter writer = new MultiFormatWriter();
-        BitMatrix bitMatrix = writer.encode(content, BarcodeFormat.QR_CODE, 300, 300);
-        Bitmap bitmap = Bitmap.createBitmap(300, 300, Bitmap.Config.RGB_565);
-        for (int x = 0; x < 300; x++) {
-            for (int y = 0; y < 300; y++) {
+        BitMatrix bitMatrix = writer.encode(content, BarcodeFormat.QR_CODE, size, size);
+        Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565);
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
                 bitmap.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
             }
         }
