@@ -9,7 +9,6 @@
     android:background="@color/blueb"
     tools:context=".MainActivity">
 
-    <!-- Scrollable Content -->
     <ScrollView
         android:id="@+id/scrollContent"
         android:layout_width="0dp"
@@ -17,8 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,12 +24,10 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Header Image -->
             <ImageView
                 android:id="@+id/headerImage"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ccc" />
 
@@ -45,24 +41,14 @@
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <!-- -->
-            <!-- Padel selection block: spinner (choose court), date & time pickers and reserve -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="8dp"
                 android:text="Padel Courts"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
-            <!-- Court selector -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Choose court"
-                android:textColor="@android:color/white" />
 
             <Spinner
                 android:id="@+id/spinnerCourts"
@@ -71,7 +57,6 @@
                 android:layout_marginTop="10dp"
                 android:background="@android:color/white" />
 
-            <!-- Date selection (opens DatePickerDialog from code) -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,11 +70,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:background="@drawable/rounded_white"
-                android:padding="12dp"
-                android:text="Select date"
-                android:textColor="@android:color/black" />
+                android:padding="12dp" />
 
-            <!-- Time selection (opens TimePickerDialog from code) -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -103,11 +85,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:background="@drawable/rounded_white"
-                android:padding="12dp"
-                android:text="Select time"
-                android:textColor="@android:color/black" />
+                android:padding="12dp" />
 
-            <!-- Number of players (optional) -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -127,7 +106,6 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/grey" />
 
-            <!-- Reserve Button -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnReserve"
                 android:layout_width="match_parent"
@@ -137,7 +115,7 @@
                 android:text="Réserver"
                 android:textColor="@android:color/white" />
 
-            <!-- FOOTER -->
+
             <LinearLayout
                 android:id="@+id/footer"
                 android:layout_width="match_parent"
@@ -147,154 +125,34 @@
                 android:orientation="vertical"
                 android:padding="24dp">
 
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
+                    android:text="LOCALISATION"
+                    android:textColor="#FFC107"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                    <!-- INFORMATION -->
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Voir notre terrain sur la carte"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:layout_marginTop="6dp"/>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:text="INFORMATION"
-                            android:textColor="#FFC107"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="CGV"
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/tvPolitique"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="Politique de Confidentialité"
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp" />
-
-                        <!-- your pdll logo under Politique -->
-                    </LinearLayout>
-
-                    <!-- SERVICES -->
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            android:text="SERVICES"
-                            android:textColor="#FFC107"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Padel courts reservation"
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <!-- CONTACT -->
-                    <LinearLayout
-
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            android:text="CONTACT"
-                            android:textColor="#FFC107"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:src="@drawable/email"
-                                app:tint="@android:color/white" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text="parksky@gmail.com"
-                                android:textColor="@android:color/white"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:src="@drawable/phone"
-                                app:tint="@android:color/white" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text="+216 99 552 112"
-                                android:textColor="@android:color/white"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <!-- Social icons -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="14dp"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:layout_marginEnd="10dp"
-                                android:src="@drawable/fb"
-                                app:tint="@android:color/white" />
-
-                            <ImageView
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:src="@drawable/insta"
-                                app:tint="@android:color/white" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/bv"
+                    android:elevation="6dp"
+                    android:text="Voir la carte"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"

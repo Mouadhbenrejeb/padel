@@ -35,16 +35,16 @@ public class PaymentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
-        // Initialize Firebase Helper
+
         firebaseHelper = FirebaseHelper.getInstance(this);
 
-        // Récupérer les données de la réservation depuis l'activité précédente
+
         court = getIntent().getStringExtra("court");
         date = getIntent().getStringExtra("date");
         time = getIntent().getStringExtra("time");
         players = getIntent().getStringExtra("players");
 
-        // Lier les vues
+
         tvPhone = findViewById(R.id.tvPhone);
         tvCredits = findViewById(R.id.tvCredits);
         spinnerParts = findViewById(R.id.spinnerParts);
@@ -53,19 +53,19 @@ public class PaymentActivity extends AppCompatActivity {
         btnPay = findViewById(R.id.btnPay);
         loadingOverlay = findViewById(R.id.loadingOverlay);
 
-        // Afficher le numéro de téléphone par défaut
+
         tvPhone.setText("95182340");
 
-        // Load user credits
+
         loadUserCredits();
 
-        // Modifier le téléphone
+
         btnModify.setOnClickListener(v -> {
-            // Ici, tu peux ouvrir un dialog pour changer le numéro
+
             Toast.makeText(PaymentActivity.this, "Modifier numéro cliqué", Toast.LENGTH_SHORT).show();
         });
 
-        // Cliquer sur Payer
+
         btnPay.setOnClickListener(v -> processPayment());
     }
 
@@ -88,32 +88,32 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
     private void processPayment() {
-        // Obtenir le nombre de parts et si extras sont commandés
-        final int parts = spinnerParts.getSelectedItemPosition() + 1; // par exemple
+
+        final int parts = spinnerParts.getSelectedItemPosition() + 1;
         final boolean extras = switchExtra.isChecked();
 
-        // Calculer prix total (exemple simple)
-        int basePrice = 80; // prix de base
+
+        int basePrice = 80;
         int price = basePrice;
-        if (extras) price += 20; // exemple frais extras
+        if (extras) price += 20;
         final int totalPrice = price;
 
-        // Check if user has enough credits
+
         if (userCredits < totalPrice) {
             Toast.makeText(this, "Crédit insuffisant! Vous avez " + String.format("%.2f", userCredits) + " DT", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Show loading
+
         showLoading(true);
 
-        // Create reservation in Firebase
+
         Reservation newReservation = new Reservation(court, date, time, players != null ? players : "4");
 
         firebaseHelper.createReservation(newReservation, new FirebaseHelper.OnOperationCompleteListener() {
             @Override
             public void onSuccess() {
-                // Deduct credits after successful reservation
+
                 final double newCredits = userCredits - totalPrice;
                 firebaseHelper.updateUserCredits(newCredits, new FirebaseHelper.OnOperationCompleteListener() {
                     @Override
@@ -122,17 +122,17 @@ public class PaymentActivity extends AppCompatActivity {
                             showLoading(false);
                             userCredits = newCredits;
                             
-                            // Paiement réussi
+
                             Toast.makeText(PaymentActivity.this, "Paiement réussi! Total: " + totalPrice + " DT", Toast.LENGTH_SHORT).show();
 
-                            // Générer contenu pour QR ou résumé
+
                             String qrContent = "Reservation: " + court + "\nDate: " + date + "\nTime: " + time;
                             if (players != null && !players.isEmpty()) {
                                 qrContent += "\nPlayers: " + players;
                             }
                             qrContent += "\nParts: " + parts + "\nExtras: " + (extras ? "Oui" : "Non");
 
-                            // Ouvrir ReservationsActivity (reservation already created)
+
                             Intent intent = new Intent(PaymentActivity.this, ReservationsActivity.class);
                             intent.putExtra("qrContent", qrContent);
                             startActivity(intent);
@@ -144,7 +144,7 @@ public class PaymentActivity extends AppCompatActivity {
                     public void onFailure(String errorMessage) {
                         runOnUiThread(() -> {
                             showLoading(false);
-                            // Reservation created but credits not deducted - still navigate
+
                             Toast.makeText(PaymentActivity.this, "Réservation créée mais erreur de crédit: " + errorMessage, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(PaymentActivity.this, ReservationsActivity.class);
                             startActivity(intent);

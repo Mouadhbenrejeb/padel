@@ -9,7 +9,6 @@
     android:background="@color/background_dark"
     tools:context=".ReservationsActivity">
 
-    <!-- Header Container -->
     <LinearLayout
         android:id="@+id/headerContainer"
         android:layout_width="match_parent"
@@ -20,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Buttons Row -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +27,7 @@
             android:gravity="end"
             android:layout_marginBottom="16dp">
 
-            <!-- Logout Button -->
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogout"
                 android:layout_width="wrap_content"
@@ -38,7 +37,7 @@
                 android:backgroundTint="#D32F2F"
                 android:layout_marginEnd="8dp"/>
 
-            <!-- Back to Menu Button -->
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackMenu"
                 android:layout_width="wrap_content"
@@ -48,7 +47,7 @@
                 android:backgroundTint="#FFC107"/>
         </LinearLayout>
 
-        <!-- Header Title -->
+
         <TextView
             android:id="@+id/tvReservationsTitle"
             android:layout_width="wrap_content"
@@ -58,7 +57,7 @@
             android:textStyle="bold"
             android:textColor="@color/accent"/>
 
-        <!-- User Credits Row -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,7 +65,7 @@
             android:gravity="center_vertical"
             android:layout_marginTop="8dp">
 
-            <!-- User Credits Display -->
+
             <TextView
                 android:id="@+id/tvUserCredits"
                 android:layout_width="0dp"
@@ -76,7 +75,7 @@
                 android:textSize="16sp"
                 android:textColor="@color/text_on_dark"/>
 
-            <!-- Add Credit Button -->
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAddCredit"
                 android:layout_width="wrap_content"
@@ -89,7 +88,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Empty State Text -->
+
     <TextView
         android:id="@+id/tvEmpty"
         android:layout_width="wrap_content"
@@ -103,7 +102,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Loading Progress -->
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
@@ -114,7 +113,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- RecyclerView for reservation list -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvReservations"
         android:layout_width="0dp"

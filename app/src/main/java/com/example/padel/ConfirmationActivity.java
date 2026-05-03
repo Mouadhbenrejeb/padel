@@ -30,7 +30,7 @@ public class ConfirmationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
 
-        // Initialize views
+
         tvCourt = findViewById(R.id.tvCourt);
         tvDate = findViewById(R.id.tvDate);
         tvTime = findViewById(R.id.tvTime);
@@ -39,7 +39,7 @@ public class ConfirmationActivity extends AppCompatActivity {
         btnViewReservations = findViewById(R.id.btnViewReservations);
         btnHome = findViewById(R.id.btnHome);
 
-        // Get data from PaymentActivity
+
         Intent intent = getIntent();
         court = intent.getStringExtra("court");
         date = intent.getStringExtra("date");
@@ -47,16 +47,16 @@ public class ConfirmationActivity extends AppCompatActivity {
         players = intent.getStringExtra("players");
         qrContent = intent.getStringExtra("qrContent");
 
-        // Set reservation details
+
         tvCourt.setText("Court: " + court);
         tvDate.setText("Date: " + date);
         tvTime.setText("Time: " + time);
         tvPlayers.setText("Players: " + (players != null ? players : "N/A"));
 
-        // Generate QR code
+
         generateQrCode(qrContent);
 
-        // Button click listeners
+
         btnViewReservations.setOnClickListener(v -> {
             Intent i = new Intent(ConfirmationActivity.this, ReservationsActivity.class);
             startActivity(i);

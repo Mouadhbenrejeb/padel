@@ -47,7 +47,7 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
         holder.tvTime.setText("Time: " + reservation.getTime());
         holder.tvPlayers.setText("Players: " + reservation.getPlayers());
 
-        // Generate QR code
+
         try {
             Bitmap bitmap = generateQrCode(reservation.getQrContent(), 300);
             holder.ivQrCode.setImageBitmap(bitmap);
@@ -55,7 +55,7 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
             e.printStackTrace();
         }
 
-        // Set click listener to show larger QR code dialog
+        //  dialog akbar ll qr code
         holder.itemView.setOnClickListener(v -> showQrCodeDialog(v.getContext(), reservation));
     }
 
@@ -76,7 +76,7 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
                 "Players: " + reservation.getPlayers();
         tvDialogDetails.setText(details);
 
-        // Generate larger QR code for dialog
+
         try {
             Bitmap bitmap = generateQrCode(reservation.getQrContent(), 600);
             ivDialogQrCode.setImageBitmap(bitmap);

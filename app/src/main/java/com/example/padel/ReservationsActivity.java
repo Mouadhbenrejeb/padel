@@ -35,12 +35,12 @@ public class ReservationsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Enable edge-to-edge display
+
         EdgeToEdge.enable(this);
         
         setContentView(R.layout.activity_reservations);
         
-        // Apply window insets for edge-to-edge
+
         View mainView = findViewById(R.id.reservationsLayout);
         if (mainView != null) {
             ViewCompat.setOnApplyWindowInsetsListener(mainView, (v, windowInsets) -> {
@@ -50,21 +50,20 @@ public class ReservationsActivity extends AppCompatActivity {
             });
         }
 
-        // Initialize Firebase Helper
+
         firebaseHelper = FirebaseHelper.getInstance(this);
 
         recyclerView = findViewById(R.id.rvReservations);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        
-        // Initialize empty state and progress views
+
         tvEmpty = findViewById(R.id.tvEmpty);
         progressBar = findViewById(R.id.progressBar);
         tvUserCredits = findViewById(R.id.tvUserCredits);
 
-        // Load user credits
+
         loadUserCredits();
 
-        // Setup logout button
+
         btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(v -> {
             firebaseHelper.logout();
@@ -74,31 +73,31 @@ public class ReservationsActivity extends AppCompatActivity {
             finish();
         });
 
-        // Setup back to menu button
+
         btnBackMenu = findViewById(R.id.btnBackMenu);
         btnBackMenu.setOnClickListener(v -> {
             Intent intent = new Intent(ReservationsActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
-        // Setup add credit button
+
         btnAddCredit = findViewById(R.id.btnAddCredit);
         btnAddCredit.setOnClickListener(v -> {
             Intent intent = new Intent(ReservationsActivity.this, AddCreditActivity.class);
             startActivity(intent);
         });
 
-        // Initialize empty list
+
         reservationList = new ArrayList<>();
         adapter = new ReservationsAdapter(reservationList);
         recyclerView.setAdapter(adapter);
 
-        // Load existing reservations
+
         loadReservationsFromFirebase();
     }
 
     private void loadReservationsFromFirebase() {
-        // Show loading state
+
         if (progressBar != null) {
             progressBar.setVisibility(View.VISIBLE);
         }
@@ -108,7 +107,7 @@ public class ReservationsActivity extends AppCompatActivity {
         
         firebaseHelper.getUserReservations(reservations -> {
             runOnUiThread(() -> {
-                // Hide loading
+
                 if (progressBar != null) {
                     progressBar.setVisibility(View.GONE);
                 }
@@ -117,7 +116,7 @@ public class ReservationsActivity extends AppCompatActivity {
                 reservationList.addAll(reservations);
                 adapter.notifyDataSetChanged();
 
-                // Show empty state if no reservations
+
                 if (reservationList.isEmpty()) {
                     recyclerView.setVisibility(View.GONE);
                     if (tvEmpty != null) {
@@ -148,9 +147,9 @@ public class ReservationsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Refresh reservations when returning to this activity
+
         loadReservationsFromFirebase();
-        // Refresh user credits
+
         loadUserCredits();
     }
 }

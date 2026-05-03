@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:padding="24dp">
 
-        <!-- Back Button -->
+
         <ImageButton
             android:id="@+id/btnBack"
             android:layout_width="48dp"
@@ -27,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:tint="@color/white"/>
 
-        <!-- Title -->
+
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
             app:layout_constraintTop_toBottomOf="@id/btnBack"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- Current Balance -->
+
         <TextView
             android:id="@+id/tvCurrentBalance"
             android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- Credit Card Section -->
+
         <TextView
             android:id="@+id/tvCardSection"
             android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvCurrentBalance"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- Card Number -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilCardNumber"
             android:layout_width="0dp"
@@ -89,7 +89,7 @@
                 android:textColor="@color/black"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Expiry Date and CVV Row -->
+
         <LinearLayout
             android:id="@+id/llExpiryRow"
             android:layout_width="0dp"
@@ -100,7 +100,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <!-- Expiry Date -->
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilExpiry"
                 android:layout_width="0dp"
@@ -122,7 +122,7 @@
                     android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- CVV -->
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilCvv"
                 android:layout_width="0dp"
@@ -145,7 +145,7 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <!-- Cardholder Name -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilCardholderName"
             android:layout_width="0dp"
@@ -168,7 +168,7 @@
                 android:textColor="@color/black"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Credit Amount Section -->
+
         <TextView
             android:id="@+id/tvCreditSection"
             android:layout_width="wrap_content"
@@ -181,7 +181,7 @@
             app:layout_constraintTop_toBottomOf="@id/tilCardholderName"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- Credit Options -->
+
         <RadioGroup
             android:id="@+id/rgCreditOptions"
             android:layout_width="0dp"
@@ -229,7 +229,7 @@
                 android:padding="12dp"/>
         </RadioGroup>
 
-        <!-- Summary Card -->
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardSummary"
             android:layout_width="0dp"
@@ -303,7 +303,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Pay Button -->
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPay"
             android:layout_width="0dp"
@@ -318,7 +318,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Loading Overlay -->
+
         <FrameLayout
             android:id="@+id/loadingOverlay"
             android:layout_width="0dp"
@@ -358,7 +358,7 @@
             </LinearLayout>
         </FrameLayout>
 
-        <!-- Success Overlay -->
+
         <FrameLayout
             android:id="@+id/successOverlay"
             android:layout_width="0dp"

@@ -15,7 +15,7 @@ public class ScanActivity extends AppCompatActivity {
 
     private ActivityScanBinding binding;
 
-    // QR Scanner launcher
+
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(
             new ScanContract(),
             result -> {
@@ -34,10 +34,10 @@ public class ScanActivity extends AppCompatActivity {
         binding = ActivityScanBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Scan button click - launch QR scanner
+
         binding.scanButton.setOnClickListener(v -> startQrScan());
 
-        // Back button click - finish activity
+
         binding.backButton.setOnClickListener(v -> finish());
     }
 
@@ -54,7 +54,7 @@ public class ScanActivity extends AppCompatActivity {
     }
 
     private void parseAndDisplayResult(String qrContent) {
-        // QR format: "court | date | time | players" or "court | date | time"
+
         String[] parts = qrContent.split("\\s*\\|\\s*");
 
         if (parts.length >= 3) {
@@ -66,7 +66,7 @@ public class ScanActivity extends AppCompatActivity {
             binding.dateText.setText(date);
             binding.timeText.setText(time);
 
-            // Check if players info is available
+
             if (parts.length >= 4) {
                 String players = parts[3].trim();
                 binding.playersText.setText(players);
@@ -75,7 +75,7 @@ public class ScanActivity extends AppCompatActivity {
                 binding.playersLayout.setVisibility(View.GONE);
             }
 
-            // Show the result card
+
             binding.resultCard.setVisibility(View.VISIBLE);
         } else {
             Toast.makeText(this, "Invalid QR code format", Toast.LENGTH_SHORT).show();

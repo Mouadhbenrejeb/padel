@@ -32,7 +32,7 @@ public class Register extends AppCompatActivity {
 
     private FirebaseHelper firebaseHelper;
     
-    // Reservation data passed from login screen
+    //  data mta3 reservation  teatada men login screen
     private String court = "";
     private String date = "";
     private String time = "";
@@ -42,12 +42,12 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Enable edge-to-edge display
+
         EdgeToEdge.enable(this);
         
         setContentView(R.layout.activity_register);
         
-        // Apply window insets for edge-to-edge
+
         View mainView = findViewById(R.id.main);
         if (mainView != null) {
             ViewCompat.setOnApplyWindowInsetsListener(mainView, (v, windowInsets) -> {
@@ -57,10 +57,10 @@ public class Register extends AppCompatActivity {
             });
         }
 
-        // Initialize Firebase Helper
+
         firebaseHelper = FirebaseHelper.getInstance(this);
         
-        // Get reservation data if passed from login screen
+        // tjib data taa reserva ken taadat mn   login
         court = getIntent().getStringExtra("court");
         date = getIntent().getStringExtra("date");
         time = getIntent().getStringExtra("time");
@@ -70,7 +70,7 @@ public class Register extends AppCompatActivity {
         if (time == null) time = "";
         if (players == null) players = "";
 
-        // Lier les vues
+
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         email = findViewById(R.id.email);
@@ -79,7 +79,7 @@ public class Register extends AppCompatActivity {
         registerBtn = findViewById(R.id.registerBtn);
         alreadySignIn = findViewById(R.id.alreadySignInText);
 
-        // Clic sur ENREGISTREMENT
+
         registerBtn.setOnClickListener(v -> {
             String fName = firstName.getText().toString().trim();
             String lName = lastName.getText().toString().trim();
@@ -108,16 +108,17 @@ public class Register extends AppCompatActivity {
                 return;
             }
 
-            // Show loading dialog
+            //  loading dialog
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Inscription en cours...");
             progressDialog.setCancelable(false);
             progressDialog.show();
 
-            // Create a flag to track if registration completed
+            // tasna3 flag tchouf register kmlt wlee
+
             final boolean[] isCompleted = {false};
 
-            // Set up timeout handler (12 seconds)
+            // hedhy timer  (12 sec)
             Handler timeoutHandler = new Handler(Looper.getMainLooper());
             Runnable timeoutRunnable = () -> {
                 if (!isCompleted[0]) {
@@ -130,19 +131,19 @@ public class Register extends AppCompatActivity {
             };
             timeoutHandler.postDelayed(timeoutRunnable, 12000);
 
-            // Register user with Firebase
+
             firebaseHelper.registerUser(mail, pass, fName, lName, new FirebaseHelper.OnAuthCompleteListener() {
                 @Override
                 public void onSuccess(FirebaseUser user) {
                     Log.d("REGISTER", "User registered successfully");
-                    if (isCompleted[0]) return; // Already timed out
+                    if (isCompleted[0]) return;
                     isCompleted[0] = true;
                     timeoutHandler.removeCallbacks(timeoutRunnable);
                     progressDialog.dismiss();
                     Toast.makeText(Register.this, "Inscription réussie", Toast.LENGTH_SHORT).show();
 
-                    // If we have reservation data, go to PaymentActivity to complete the reservation
-                    // Otherwise, go to ReservationsActivity to view existing reservations
+                    //  ken fam data taa reserv temchy ll payment screen sinon temchy reservationactiv wtchouf reservation mteek
+
                     Intent intent;
                     if (date != null && !date.isEmpty() && time != null && !time.isEmpty()) {
                         intent = new Intent(Register.this, PaymentActivity.class);
@@ -160,7 +161,7 @@ public class Register extends AppCompatActivity {
 
                 @Override
                 public void onFailure(String errorMessage) {
-                    if (isCompleted[0]) return; // Already timed out
+                    if (isCompleted[0]) return;
                     isCompleted[0] = true;
                     timeoutHandler.removeCallbacks(timeoutRunnable);
                     progressDialog.dismiss();
@@ -170,7 +171,7 @@ public class Register extends AppCompatActivity {
             });
         });
 
-        // Clic sur "Déjà inscrit? S'identifier"
+
         alreadySignIn.setOnClickListener(v -> {
             Intent intent = new Intent(Register.this, ReservationLogin.class);
             startActivity(intent);
@@ -178,42 +179,31 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    /**
-     * Validates password strength and returns an error message in French if requirements are not met.
-     * Password must contain at least:
-     * - 6 characters
-     * - One uppercase letter
-     * - One lowercase letter
-     * - One number
-     * - One special character
-     *
-     * @param password The password to validate
-     * @return Error message in French if validation fails, null if password is valid
-     */
+
     private String validatePasswordStrength(String password) {
         StringBuilder errorMessage = new StringBuilder();
         
-        // Check minimum length
+
         if (password.length() < 6) {
             errorMessage.append("• Au moins 6 caractères\n");
         }
         
-        // Check for at least one uppercase letter
+
         if (!password.matches(".*[A-Z].*")) {
             errorMessage.append("• Au moins une lettre majuscule\n");
         }
         
-        // Check for at least one lowercase letter
+
         if (!password.matches(".*[a-z].*")) {
             errorMessage.append("• Au moins une lettre minuscule\n");
         }
         
-        // Check for at least one number
+
         if (!password.matches(".*[0-9].*")) {
             errorMessage.append("• Au moins un chiffre\n");
         }
         
-        // Check for at least one special character
+
         if (!password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?].*")) {
             errorMessage.append("• Au moins un caractère spécial (!@#$%^&*...)\n");
         }

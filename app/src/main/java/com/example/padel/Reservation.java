@@ -1,8 +1,6 @@
 package com.example.padel;
 
-/**
- * Model class representing a Reservation in Firebase
- */
+
 public class Reservation {
     private String id;
     private String userId;
@@ -12,7 +10,7 @@ public class Reservation {
     private String players;
     private String status;
 
-    // Required empty constructor for Firebase
+    //construc farghyn llfirebase
     public Reservation() {
     }
 

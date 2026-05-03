@@ -18,7 +18,7 @@
             android:orientation="vertical"
             android:gravity="center_horizontal">
 
-            <!-- Title -->
+
             <TextView
                 android:id="@+id/title"
                 android:text="Commencer!!"
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-            <!-- Names row -->
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -66,7 +66,7 @@
                     android:textColorHint="@color/text_secondary"/>
             </LinearLayout>
 
-            <!-- Email -->
+
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
@@ -80,7 +80,7 @@
                 android:textColor="@color/text_primary"
                 android:textColorHint="@color/text_secondary"/>
 
-            <!-- Password with eye icon -->
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -109,7 +109,7 @@
                     android:layout_height="40dp"/>
             </RelativeLayout>
 
-            <!-- Password strength text -->
+
             <TextView
                 android:text="Robutesse du mot de passe :"
                 android:textSize="13sp"
@@ -118,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <!-- Password strength bars -->
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
@@ -151,7 +151,7 @@
                     android:layout_margin="3dp" />
             </LinearLayout>
 
-            <!-- Checkbox -->
+
             <CheckBox
                 android:id="@+id/terms"
                 android:text="J'accepte les Conditions d'utilisation  la Politique de confidentialité."
@@ -161,7 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <!-- Register button -->
+
             <Button
                 android:id="@+id/registerBtn"
                 android:layout_width="match_parent"
@@ -173,7 +173,7 @@
                 android:backgroundTint="#005BFF"
                 android:layout_marginBottom="20dp"/>
 
-            <!-- Already have account -->
+
             <TextView
                 android:id="@+id/alreadySignInText"
                 android:text="Déjà inscrit? S'identifier"

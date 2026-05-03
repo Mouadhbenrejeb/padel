@@ -34,7 +34,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.Holder> {
      */
     public void setDisabledTimes(List<String> disabledTimes) {
         this.disabledTimes = disabledTimes != null ? disabledTimes : new ArrayList<>();
-        // Reset selection if the selected time is now disabled
+
         if (selected >= 0 && selected < times.size() && this.disabledTimes.contains(times.get(selected))) {
             selected = -1;
         }
@@ -73,13 +73,13 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.Holder> {
         boolean isDisabled = disabledTimes.contains(time);
 
         if (isDisabled) {
-            // Disabled state - slot is already booked
+
             h.tvTime.setBackgroundResource(R.drawable.time_disabled);
-            h.tvTime.setTextColor(0xFF9E9E9E); // Gray color
+            h.tvTime.setTextColor(0xFF9E9E9E);
             h.tvTime.setEnabled(false);
             h.tvTime.setOnClickListener(null);
         } else if (pos == selected) {
-            // Selected state
+
             h.tvTime.setBackgroundResource(R.drawable.time_selected);
             h.tvTime.setTextColor(0xFFFFFFFF);
             h.tvTime.setEnabled(true);
@@ -92,7 +92,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.Holder> {
                 }
             });
         } else {
-            // Available state
+
             h.tvTime.setBackgroundResource(R.drawable.time_available);
             h.tvTime.setTextColor(0xFF1565C0);
             h.tvTime.setEnabled(true);

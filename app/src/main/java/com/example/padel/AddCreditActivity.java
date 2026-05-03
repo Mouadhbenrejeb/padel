@@ -38,13 +38,13 @@ public class AddCreditActivity extends AppCompatActivity {
     private TextView tvLoadingMessage, tvSuccessMessage;
     private MaterialButton btnDone;
 
-    // Data
+
     private FirebaseHelper firebaseHelper;
     private double currentCredits = 0;
     private int selectedCredits = 0;
     private double selectedPrice = 0;
 
-    // Credit packages: credits -> price
+
     private static final int CREDITS_50 = 50;
     private static final double PRICE_50 = 25.00;
     private static final int CREDITS_100 = 100;
@@ -58,12 +58,12 @@ public class AddCreditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Enable edge-to-edge display
+
         EdgeToEdge.enable(this);
 
         setContentView(R.layout.activity_add_credit);
 
-        // Apply window insets for edge-to-edge
+
         View mainView = findViewById(R.id.addCreditLayout);
         if (mainView != null) {
             ViewCompat.setOnApplyWindowInsetsListener(mainView, (v, windowInsets) -> {
@@ -73,16 +73,16 @@ public class AddCreditActivity extends AppCompatActivity {
             });
         }
 
-        // Initialize Firebase Helper
+
         firebaseHelper = FirebaseHelper.getInstance(this);
 
-        // Initialize UI elements
+
         initViews();
 
-        // Setup listeners
+
         setupListeners();
 
-        // Load current balance
+
         loadCurrentBalance();
     }
 
@@ -109,10 +109,10 @@ public class AddCreditActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
-        // Back button
+
         btnBack.setOnClickListener(v -> finish());
 
-        // Credit card number formatting
+
         etCardNumber.addTextChangedListener(new TextWatcher() {
             private boolean isFormatting = false;
 
@@ -127,11 +127,11 @@ public class AddCreditActivity extends AppCompatActivity {
                 if (isFormatting) return;
                 isFormatting = true;
 
-                // Remove all spaces
+
                 String text = s.toString().replace(" ", "");
                 StringBuilder formatted = new StringBuilder();
 
-                // Add space every 4 digits
+
                 for (int i = 0; i < text.length(); i++) {
                     if (i > 0 && i % 4 == 0) {
                         formatted.append(" ");
@@ -145,7 +145,7 @@ public class AddCreditActivity extends AppCompatActivity {
             }
         });
 
-        // Expiry date formatting (MM/YY)
+
         etExpiry.addTextChangedListener(new TextWatcher() {
             private boolean isFormatting = false;
 
@@ -176,7 +176,7 @@ public class AddCreditActivity extends AppCompatActivity {
             }
         });
 
-        // Credit options selection
+
         rgCreditOptions.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.rb50Credits) {
                 selectedCredits = CREDITS_50;
@@ -194,10 +194,10 @@ public class AddCreditActivity extends AppCompatActivity {
             updateSummary();
         });
 
-        // Pay button
+
         btnPay.setOnClickListener(v -> processPayment());
 
-        // Done button (after successful payment)
+
         btnDone.setOnClickListener(v -> finish());
     }
 
@@ -220,33 +220,33 @@ public class AddCreditActivity extends AppCompatActivity {
     }
 
     private void processPayment() {
-        // Validate inputs
+
         if (!validateInputs()) {
             return;
         }
 
-        // Show loading overlay
+
         showLoading("Processing payment...");
 
-        // Simulate payment processing with multiple steps
+
         Handler handler = new Handler(Looper.getMainLooper());
 
-        // Step 1: Validating card (1 second)
+
         handler.postDelayed(() -> {
             updateLoadingMessage("Validating card...");
         }, 1000);
 
-        // Step 2: Contacting bank (1.5 seconds)
+
         handler.postDelayed(() -> {
             updateLoadingMessage("Contacting bank...");
         }, 2500);
 
-        // Step 3: Processing transaction (1 second)
+
         handler.postDelayed(() -> {
             updateLoadingMessage("Processing transaction...");
         }, 3500);
 
-        // Step 4: Complete payment and update credits (1 second)
+
         handler.postDelayed(() -> {
             updateLoadingMessage("Finalizing...");
             updateCreditsInDatabase();
@@ -254,7 +254,7 @@ public class AddCreditActivity extends AppCompatActivity {
     }
 
     private boolean validateInputs() {
-        // Check card number (should be 16 digits + 3 spaces = 19 chars)
+
         String cardNumber = etCardNumber.getText().toString().replace(" ", "");
         if (cardNumber.length() < 16) {
             Toast.makeText(this, "Please enter a valid card number", Toast.LENGTH_SHORT).show();
@@ -262,7 +262,7 @@ public class AddCreditActivity extends AppCompatActivity {
             return false;
         }
 
-        // Check expiry date (should be MM/YY format = 5 chars)
+
         String expiry = etExpiry.getText().toString();
         if (expiry.length() < 5) {
             Toast.makeText(this, "Please enter a valid expiry date (MM/YY)", Toast.LENGTH_SHORT).show();
@@ -270,7 +270,7 @@ public class AddCreditActivity extends AppCompatActivity {
             return false;
         }
 
-        // Check CVV (should be 3-4 digits)
+
         String cvv = etCvv.getText().toString();
         if (cvv.length() < 3) {
             Toast.makeText(this, "Please enter a valid CVV", Toast.LENGTH_SHORT).show();
@@ -278,7 +278,7 @@ public class AddCreditActivity extends AppCompatActivity {
             return false;
         }
 
-        // Check cardholder name
+
         String cardholderName = etCardholderName.getText().toString().trim();
         if (cardholderName.isEmpty()) {
             Toast.makeText(this, "Please enter the cardholder name", Toast.LENGTH_SHORT).show();
@@ -286,7 +286,7 @@ public class AddCreditActivity extends AppCompatActivity {
             return false;
         }
 
-        // Check if credit amount is selected
+
         if (selectedCredits == 0) {
             Toast.makeText(this, "Please select a credit amount", Toast.LENGTH_SHORT).show();
             return false;

@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.example.padel" />
-                  <option name="mobileSdkAppId" value="1:230526950110:android:3440d33ba0643a2cd3004f" />
-                  <option name="projectId" value="padel-86a71" />
-                  <option name="projectNumber" value="230526950110" />
+                  <option name="mobileSdkAppId" value="1:309286575866:android:7c4ef05956c44e3a6f3343" />
+                  <option name="projectId" value="padel-3d07a" />
+                  <option name="projectNumber" value="309286575866" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

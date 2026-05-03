@@ -40,12 +40,12 @@ public class ReservationLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Enable edge-to-edge display
+
         EdgeToEdge.enable(this);
         
         setContentView(R.layout.activity_reservation_login);
         
-        // Apply window insets for edge-to-edge
+
         View mainView = findViewById(R.id.loginLayout);
         if (mainView != null) {
             ViewCompat.setOnApplyWindowInsetsListener(mainView, (v, windowInsets) -> {
@@ -55,28 +55,28 @@ public class ReservationLogin extends AppCompatActivity {
             });
         }
 
-        // Initialize Firebase Helper
+
         firebaseHelper = FirebaseHelper.getInstance(this);
 
-        // Récupérer les données passées depuis MainActivity
+
         court = getIntent().getStringExtra("court");
         date = getIntent().getStringExtra("date");
         time = getIntent().getStringExtra("time");
         players = getIntent().getStringExtra("players");
 
-        // Check if user is already logged in
+
         if (firebaseHelper.isUserLoggedIn()) {
             navigateToPayment();
             return;
         }
 
-        // Lier les vues XML
+
         Email = findViewById(R.id.email);
         Password = findViewById(R.id.password);
         loginbtn = findViewById(R.id.loginBtn);
         forgotSignUpText = findViewById(R.id.forgotSignUpText);
 
-        // Gestion du bouton login
+
         loginbtn.setOnClickListener(v -> {
             String email = Email.getText().toString().trim();
             String pass = Password.getText().toString().trim();
@@ -91,13 +91,13 @@ public class ReservationLogin extends AppCompatActivity {
                 return;
             }
 
-            // Show loading dialog
+
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Connexion en cours...");
             progressDialog.setCancelable(false);
             progressDialog.show();
 
-            // Firebase Authentication
+
             firebaseHelper.loginUser(email, pass, new FirebaseHelper.OnAuthCompleteListener() {
                 @Override
                 public void onSuccess(FirebaseUser user) {
@@ -114,15 +114,15 @@ public class ReservationLogin extends AppCompatActivity {
             });
         });
 
-        // Gestion du texte "Mot de passe oublié ? S'inscrire"
+
         String text = forgotSignUpText.getText().toString();
         SpannableString spannable = new SpannableString(text);
 
-        // Partie "Mot de passe oublié ?" cliquable
+
         ClickableSpan forgotClickable = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-                // Send password reset email using Firebase
+
                 String email = Email.getText().toString().trim();
                 if (email.isEmpty()) {
                     Toast.makeText(ReservationLogin.this, "Veuillez entrer votre email", Toast.LENGTH_SHORT).show();
@@ -150,11 +150,11 @@ public class ReservationLogin extends AppCompatActivity {
         };
         spannable.setSpan(forgotClickable, 0, "Mot de passe oublié ?".length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        // Partie "S'inscrire" cliquable
+
         ClickableSpan signUpClickable = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-                // Ouvrir Register.java with reservation data
+
                 Intent intent = new Intent(ReservationLogin.this, Register.class);
                 intent.putExtra("court", court);
                 intent.putExtra("date", date);
@@ -172,17 +172,17 @@ public class ReservationLogin extends AppCompatActivity {
         };
         spannable.setSpan(signUpClickable, text.indexOf("S'inscrire"), text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        // Appliquer le SpannableString au TextView
+
         forgotSignUpText.setText(spannable);
         forgotSignUpText.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     private void navigateToPayment() {
-        // Check if we have reservation details (coming from MainActivity)
-        // If not (coming from Intro), go to ReservationsActivity instead
+        // tchouf idha fama reservation detzail mn mainactivitionymchy pzyment act sinon  ymchy l reservation act
+
         Intent intent;
         if (date != null && !date.isEmpty() && time != null && !time.isEmpty()) {
-            // We have reservation details, go to PaymentActivity to complete reservation
+
             intent = new Intent(ReservationLogin.this, PaymentActivity.class);
             intent.putExtra("court", court);
             intent.putExtra("date", date);
@@ -192,7 +192,7 @@ public class ReservationLogin extends AppCompatActivity {
                 intent.putExtra("email", firebaseHelper.getCurrentUser().getEmail());
             }
         } else {
-            // No reservation details, go to ReservationsActivity to view existing reservations
+
             intent = new Intent(ReservationLogin.this, ReservationsActivity.class);
         }
         startActivity(intent);

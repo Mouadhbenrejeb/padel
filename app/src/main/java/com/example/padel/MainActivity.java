@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
 
     Spinner spinnerCourts;
     EditText etPlayers;
-    Button btnReserve;
+    Button btnReserve ,btnMap ;
 
     RecyclerView rvDates, rvTimes;
 
@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Enable edge-to-edge display
+
         EdgeToEdge.enable(this);
         
         setContentView(R.layout.activity_main);
         
-        // Apply window insets for edge-to-edge
+
         View mainView = findViewById(R.id.main);
         if (mainView != null) {
             ViewCompat.setOnApplyWindowInsetsListener(mainView, (v, windowInsets) -> {
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity
             });
         }
 
-        // Initialize Firebase Helper
+
         firebaseHelper = FirebaseHelper.getInstance(this);
 
         spinnerCourts = findViewById(R.id.spinnerCourts);
@@ -71,14 +71,15 @@ public class MainActivity extends AppCompatActivity
         btnReserve = findViewById(R.id.btnReserve);
         rvDates = findViewById(R.id.rvDate);
         rvTimes = findViewById(R.id.rvTime);
+        Button btnMap = findViewById(R.id.btnMap);
 
-        // Set up InputFilter for players EditText to restrict input to numbers 1-4
+
         setupPlayersInputFilter();
 
-        // Load courts from Firebase
+
         loadCourtsFromFirebase();
 
-        // Dates RecyclerView
+
         rvDates.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         );
@@ -86,26 +87,30 @@ public class MainActivity extends AppCompatActivity
         DateAdapter dateAdapter = new DateAdapter(dates, this);
         rvDates.setAdapter(dateAdapter);
         
-        // Set default selected date to today (first item in the list)
+
         if (!dates.isEmpty()) {
-            selectedDate = dates.get(0)[1]; // The date string (e.g., "15/12")
+            selectedDate = dates.get(0)[1];
         }
 
-        // Times RecyclerView
+
         rvTimes.setLayoutManager(new GridLayoutManager(this, 3));
         timeAdapter = new TimeAdapter(generateTimes(), this);
         rvTimes.setAdapter(timeAdapter);
 
         btnReserve.setOnClickListener(v -> reserve());
+        btnMap.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, MapActivity.class));
+        });
+
     }
 
     private void setupPlayersInputFilter() {
-        // InputFilter to restrict input to numbers 1-4 only
+
         InputFilter playersFilter = new InputFilter() {
             @Override
             public CharSequence filter(CharSequence source, int start, int end,
                                        Spanned dest, int dstart, int dend) {
-                // Allow empty input (for deletion)
+
                 if (source.length() == 0) {
                     return null;
                 }
@@ -115,27 +120,27 @@ public class MainActivity extends AppCompatActivity
                 builder.replace(dstart, dend, source.subSequence(start, end).toString());
                 String result = builder.toString();
 
-                // Check if result is empty (allow it for typing)
+
                 if (result.isEmpty()) {
                     return null;
                 }
 
-                // Only allow single digit numbers 1-4
+
                 try {
                     int value = Integer.parseInt(result);
                     if (value >= 1 && value <= 4) {
-                        return null; // Accept the input
+                        return null;
                     }
                 } catch (NumberFormatException e) {
-                    // Not a valid number
+
                 }
 
-                // Reject the input
+
                 return "";
             }
         };
 
-        // Apply the filter along with max length of 1
+
         etPlayers.setFilters(new InputFilter[]{playersFilter, new InputFilter.LengthFilter(1)});
     }
 
@@ -145,7 +150,7 @@ public class MainActivity extends AppCompatActivity
             List<String> courtNames = new ArrayList<>();
             
             if (courts.isEmpty()) {
-                // Fallback to default courts if Firebase is empty
+
                 courtNames.add("Court 1");
                 courtNames.add("Court 2");
                 courtNames.add("Court 3");
@@ -162,14 +167,14 @@ public class MainActivity extends AppCompatActivity
                         courtNames
                 ));
                 
-                // Add listener to refresh time slots when court changes
+                // listener yrefrechi lwa9t fi kol mara ytbadal fiha court
                 spinnerCourts.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        // Refresh time slot availability for the selected date
+
                         if (!selectedDate.isEmpty()) {
                             String selectedCourt = parent.getItemAtPosition(position).toString();
-                            selectedTime = ""; // Reset selected time
+                            selectedTime = "";
                             if (timeAdapter != null) {
                                 timeAdapter.resetSelection();
                             }
@@ -185,7 +190,7 @@ public class MainActivity extends AppCompatActivity
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
-                        // Do nothing
+                        // maysir chay
                     }
                 });
             });
@@ -198,14 +203,14 @@ public class MainActivity extends AppCompatActivity
             return;
         }
 
-        // Get selected court from spinner
+
         String selectedCourt = spinnerCourts.getSelectedItem() != null ? 
                 spinnerCourts.getSelectedItem().toString() : "Court 1";
         
-        // Get players count (optional)
+
         String players = etPlayers.getText().toString().trim();
         
-        // Only validate players if a value is provided
+
         if (!players.isEmpty()) {
             try {
                 int playersCount = Integer.parseInt(players);
@@ -233,18 +238,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onDateSelected(String date) {
         selectedDate = date;
-        selectedTime = ""; // Reset selected time when date changes
+        selectedTime = ""; // yreseti ki yetbadal date li mselecti
         
-        // Reset time adapter selection
+
         if (timeAdapter != null) {
             timeAdapter.resetSelection();
         }
         
-        // Get selected court
+
         String selectedCourt = spinnerCourts.getSelectedItem() != null ? 
                 spinnerCourts.getSelectedItem().toString() : "Court 1";
         
-        // Fetch booked time slots from Firebase
+
         firebaseHelper.getBookedTimeSlots(selectedCourt, date, bookedTimes -> {
             runOnUiThread(() -> {
                 if (timeAdapter != null) {
@@ -259,7 +264,7 @@ public class MainActivity extends AppCompatActivity
         selectedTime = time;
     }
 
-    // DATA
+
     private ArrayList<String[]> generateDates() {
         ArrayList<String[]> dates = new ArrayList<>();
         Calendar c = Calendar.getInstance();
